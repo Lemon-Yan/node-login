@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>注册</title>
+    <link rel="stylesheet" href="public/css/comm.css" />
+  </head>
+  <body>
+    <div id="nav">
+      <ul>
+        <li>
+          <a href="login.html">登录</a>
+        </li>
+        <li>
+          <a href="register.html">注册</a>
+        </li>
+      </ul>
+    </div>
+    <div class="wrapper">
+      <h1>欢迎注册XX系统</h1>
+      <div class="form-list">
+        <div class="form-item">
+          <span>用户名：</span>
+          <input type="text" name="username" id="name" />
+        </div>
+        <div class="form-item">
+          <span>密码：</span>
+          <input type="text" name="userpwd" id="pwd" />
+        </div>
+        <div class="btn">
+          <button onclick="submit()">注册</button>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="public/js/jquery.min.js"></script>
+  <script>
+    function submit() {
+      var name = $("#name")
+        .val()
+        .trim();
+      var pwd = $("#pwd")
+        .val()
+        .trim();
+      $.ajax({
+        url: "http://127.0.0.1:8082/process_register",
+        type: "post",
+        data: {
+          userName: name,
+          pwd: pwd
+        },
+        success: function(res) {
+          console.log(res);
+          if (res.code == 0) {
+            alert("注册成功");
+          } else {
+            alert(res.message);
+          }
+        }
+      });
+    }
+  </script>
+</html>
